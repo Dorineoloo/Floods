@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Prediction</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            
+            background-image: url('/static/img/afric.jpg');
+            
+            background-size: cover;
+           
+            background-attachment: fixed;
+            
+            background-position: center;
+           
+            /*margin: 0;*/
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .prediction {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .result {
+            font-weight: bold;
+            color: green;
+            margin-bottom: 10px;
+        }
+        .predicted_riverlevel {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .mitigation_strategy {
+            color: blue;
+        }
+
+        
+        table {
+            width: 100%;
+            
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            text-align: left;
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Flood Prediction</h2>
+        <form action="/predict" method="post">
+            <label for="rainfall_amount">Enter Rainfall Amount:</label>
+            <input type="number" id="rainfall_amount" name="rainfall_amount" step="any" required>
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction_text %}
+            <div class="prediction">
+                <table>
+                    <tr>
+                        <th>Result</th>
+                        <td>{{ prediction_text.result }}</td>
+                    </tr>
+                    <tr>
+                        <th>Predicted River Level</th>
+                        <td>{{ prediction_text.predicted_riverlevel[0] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Mitigation Strategy</th>
+                        <td>{{ prediction_text.mitigation_strategy }}</td>
+                    </tr>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
